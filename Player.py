@@ -18,9 +18,11 @@ class Player:
 		print ('\t-------------')
 		print ('\t' + str(self.hand))
 		
-		# pick up from the board?
+		# determine if we should draw from the board
+        # start by combinging your hand plus the board and checking for matches
 		boardhand = board + self.hand
 		matches = findTrips(boardhand) + findQuads(boardhand) + findRun(boardhand)
+        # we must make sure that card in one of the matches found is actually on the board
 		matchesFound = 0
 		if matches:
 			for match in matches:
@@ -31,10 +33,11 @@ class Player:
 						pass
 		
 	
-		# if matches found then we should draw from board
+		# if we can make a match with the board then we will draw
 		if matchesFound:
 			chosenMatches = uniqNvalue(matches)
 			bIndex = -1
+            # we will find the deepest matched card and draw from there
 			for match in chosenMatches:
 				for card in match:
 					try:
@@ -59,7 +62,7 @@ class Player:
 			board = board[:bIndex]
 			'''
 				
-		# if not we should draw from deck
+		# if not we will draw from the deck
 		else:
 			# draw a card
 			newCard = deck.pop()
@@ -74,7 +77,7 @@ class Player:
 		print ('\t' + str(self.hand))		
 		
 		
-		# do i have any matches?
+		# check for matches in your hand
 		matches = findTrips(self.hand) + findQuads(self.hand) + findRun(self.hand)
 		if matches:
 			print ('\tmatches found')
@@ -97,7 +100,7 @@ class Player:
 		
 		
 		
-		# -!- must also check table
+		# -!- must also check table to avoid RUMMY!!!!!!!!
 		
 		
 		
